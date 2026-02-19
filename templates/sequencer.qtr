@@ -17,7 +17,9 @@
  </state>
  <files>
   <audio-list/>
-  <midi-list/>
+  <midi-list>
+     <file name="metronome.mid">../midi/metronome.mid</file>
+  </midi-list>
  </files>
  <devices>
   <audio-engine>
@@ -153,7 +155,26 @@
     <foreground-color>#66667f</foreground-color>
    </view>
    <controllers/>
-   <clips/>
+   <clips>
+       <clip name="metronome">
+     <properties>
+      <name>metronome</name>
+      <start>0</start>
+      <offset>0</offset>
+      <length>768000</length>
+      <gain>1</gain>
+      <panning>0</panning>
+      <fade-in type="InQuad">0</fade-in>
+      <fade-out type="OutQuad">0</fade-out>
+     </properties>
+     <midi-clip>
+      <filename>../midi/metronome.mid</filename>
+      <track-channel>0</track-channel>
+      <revision>1</revision>
+      <editor-pos>0,0</editor-pos>
+     </midi-clip>
+    </clip>
+   </clips>
    <plugins/>
   </track>
    <track name="Drums - dry" type="midi">

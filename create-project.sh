@@ -101,6 +101,10 @@ cp $LAUNCH_SCRIPTS $PROJECT_DIR
 echo "Creating folder for midi..."
 mkdir -p "$PROJECT_DIR/midi"
 
+echo "Creating a metronome..."
+python scripts/create-metronome.py $BPM
+mv metronome.mid "$PROJECT_DIR/midi"
+
 echo "Copying port config..."
 cp interfaces.conf $PROJECT_DIR
 
