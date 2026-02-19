@@ -88,6 +88,9 @@ while IFS= read -r PORT; do
     jack_connect "$GUITAR_PORT" "$PORT"
 done
 
+echo "TODO connect midi outputs to qsynth"
+# TODO
+
 echo "Connecting Qtractor mono outputs to headphones..."
 jack_lsp -p |
 awk '
