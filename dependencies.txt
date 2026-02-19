@@ -3,6 +3,6 @@ guitarix
 hydrogen
 tuxguitar
 lv2-calf-plugins
-carla
+calfjackhost
 qjackctl
 qsynth

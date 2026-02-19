@@ -58,4 +58,16 @@ DEFAULT_AMP_NAME="rhythm_guitar"
 mkdir -p "$AMP_FOLDER"
 cp "$AMP_TEMPLATE" "$AMP_FOLDER/$DEFAULT_AMP_NAME"
 
+echo "Setting up a rack..."
+
+RACK_TEMPLATE="$TEMPLATES/vocal_effect"
+RACK_FOLDER="$PROJECT_DIR/racks"
+DEFAULT_RACK_NAME="vocal_rack"
+mkdir -p "$RACK_FOLDER"
+cp "$RACK_TEMPLATE" "$RACK_FOLDER/$DEFAULT_RACK_NAME"
+
+echo "Creating launch script..."
+LAUNCH_SCRIPT="scripts/launch.sh"
+cp $LAUNCH_SCRIPT $PROJECT_DIR
+
 echo "Project created in '$PROJECT_DIR' with tempo $BPM BPM."
