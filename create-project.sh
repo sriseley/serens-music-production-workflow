@@ -95,8 +95,22 @@ cp "$DRUM_TEMPLATE" "$DRUM_FOLDER"
 sed -i "s|\$BPM|$BPM|g" "$DRUM_FOLDER/$(basename "$DRUM_TEMPLATE")"
 
 echo "Creating scripts..."
-LAUNCH_SCRIPTS="scripts/*.sh"
-cp $LAUNCH_SCRIPTS $PROJECT_DIR
+LAUNCH_SCRIPT="scripts/launch.sh"
+CLOSEALL_SCRIPT="scripts/closeall.sh"
+
+SCRIPTS=($LAUNCH_SCRIPT $CLOSEALL_SCRIPT)
+for f in "${SCRIPTS[@]}"; do
+    cp "$f" "$PROJECT_DIR"
+done
+
+
+PROJECT_SCRIPTS_DIR="$PROJECT_DIR/scripts"
+mkdir -p $PROJECT_SCRIPTS_DIR
+
+SCRIPTS=("scripts/setup-interfaces.sh" "scripts/wire-calf.py")
+for f in "${SCRIPTS[@]}"; do
+    cp "$f" "$PROJECT_SCRIPTS_DIR"
+done
 
 echo "Creating folder for midi..."
 mkdir -p "$PROJECT_DIR/midi"

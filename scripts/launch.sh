@@ -101,16 +101,6 @@ while IFS= read -r PORT; do
     jack_connect "$PORT" "$HP_R"
 done
 
-echo "Connecting Qtractor vocal outputs to effects rack..."
-
-VOCAL_BUS=$(jack_lsp -p | awk '
-BEGIN {IGNORECASE=1}
-/^[^[:space:]]/ {port=$0}
-/properties: output/ && port ~ /qtractor/ && port ~ /vocals/ {print port; exit}
-')
-
-# TODO
-
 echo "Connecting Qtractor Master outputs to headphones (true stereo)..."
 
 MASTER_PORTS=($(jack_lsp -p | awk '
@@ -156,6 +146,9 @@ if ! jack_lsp -c | grep -q "$MIC_PORT.*$VOCAL_PORT"; then
 else
     echo "Connection already exists: $MIC_PORT → $VOCAL_PORT"
 fi
+
+echo "Wiring up rack..."
+python scripts/wire-calf.py
 
 echo "Done."
 

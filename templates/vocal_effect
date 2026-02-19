@@ -38,6 +38,27 @@
   <param name="analyzer_mode" value="1" />
 </preset>
 </plugin>
+<plugin type="deesser" instance-name="Deesser" input-index="8" output-index="9">
+  <preset bank="0" program="0" plugin="deesser" name="">
+    <param name="bypass" value="0" />
+    <param name="detected" value="0" />
+    <param name="compression" value="1" />
+    <param name="detected_led" value="0" />
+    <param name="clip_out" value="0" />
+    <param name="detection" value="0" />
+    <param name="mode" value="0" />
+    <param name="threshold" value="0.125" />
+    <param name="ratio" value="3" />
+    <param name="laxity" value="15" />
+    <param name="makeup" value="1" />
+    <param name="f1_freq" value="6000" />
+    <param name="f2_freq" value="4500" />
+    <param name="f1_level" value="1" />
+    <param name="f2_level" value="4" />
+    <param name="f2_q" value="1" />
+    <param name="sc_listen" value="0" />
+  </preset>
+</plugin>
 <plugin type="compressor" instance-name="Compressor" input-index="4" output-index="5">
 <preset bank="0" program="0" plugin="compressor" name="">
   <param name="bypass" value="0" />
@@ -85,26 +106,37 @@
   <param name="post" value="0" />
 </preset>
 </plugin>
-<plugin type="deesser" instance-name="Deesser" input-index="8" output-index="9">
-<preset bank="0" program="0" plugin="deesser" name="">
-  <param name="bypass" value="0" />
-  <param name="detected" value="0" />
-  <param name="compression" value="1" />
-  <param name="detected_led" value="0" />
-  <param name="clip_out" value="0" />
-  <param name="detection" value="0" />
-  <param name="mode" value="0" />
-  <param name="threshold" value="0.125" />
-  <param name="ratio" value="3" />
-  <param name="laxity" value="15" />
-  <param name="makeup" value="1" />
-  <param name="f1_freq" value="6000" />
-  <param name="f2_freq" value="4500" />
-  <param name="f1_level" value="1" />
-  <param name="f2_level" value="4" />
-  <param name="f2_q" value="1" />
-  <param name="sc_listen" value="0" />
-</preset>
+<plugin type="vintagedelay" instance-name="Vintage Delay" input-index="12" output-index="13">
+  <preset bank="0" program="0" plugin="vintagedelay" name="">
+    <param name="on" value="1" />
+    <param name="level_in" value="1" />
+    <param name="level_out" value="1" />
+    <param name="meter_inL" value="0" />
+    <param name="meter_inR" value="0" />
+    <param name="meter_outL" value="0" />
+    <param name="meter_outR" value="0" />
+    <param name="clip_inL" value="0" />
+    <param name="clip_inR" value="0" />
+    <param name="clip_outL" value="0" />
+    <param name="clip_outR" value="0" />
+    <param name="subdiv" value="4" />
+    <param name="time_l" value="3" />
+    <param name="time_r" value="5" />
+    <param name="feedback" value="0.5" />
+    <param name="amount" value="0.25" />
+    <param name="mix_mode" value="1" />
+    <param name="medium" value="1" />
+    <param name="dry" value="1" />
+    <param name="width" value="1" />
+    <param name="fragmentation" value="0" />
+    <param name="pbeats" value="4" />
+    <param name="pfrag" value="4" />
+    <param name="timing" value="0" />
+    <param name="bpm" value="120" />
+    <param name="ms" value="500" />
+    <param name="hz" value="2" />
+    <param name="bpm_host" value="120" />
+  </preset>
 </plugin>
 <plugin type="reverb" instance-name="Reverb" input-index="10" output-index="11">
 <preset bank="0" program="0" plugin="reverb" name="">
