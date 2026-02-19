@@ -1,25 +1,6 @@
 #!/bin/bash
 
-list_inputs() {
-    jack_lsp -p | awk '
-    /^[^[:space:]]/ {port=$0}
-    /properties: input/ {print port}
-    '
-}
 
-list_outputs() {
-    jack_lsp -p | awk '
-    /^[^[:space:]]/ {port=$0}
-    /properties: output/ {print port}
-    '
-}
-
-select_port() {
-    prompt="$1"
-    ports="$2"
-
-    echo "$ports" | fzf --prompt="$prompt > "
-}
 
 create_tab() {
     local TEMPLATE_NAME="$1"
@@ -106,17 +87,12 @@ mkdir -p "$DRUM_FOLDER"
 cp "$DRUM_TEMPLATE" "$DRUM_FOLDER"
 sed -i "s|\$BPM|$BPM|g" "$DRUM_FOLDER/$(basename "$DRUM_TEMPLATE")"
 
-echo "Creating launch script..."
-LAUNCH_SCRIPT="scripts/launch.sh"
-cp $LAUNCH_SCRIPT $PROJECT_DIR
+echo "Creating scripts..."
+LAUNCH_SCRIPTS="scripts/*.sh"
+cp $LAUNCH_SCRIPTS $PROJECT_DIR
 
-echo "Saving port config..."
-cat > "$PROJECT_DIR/interfaces.conf" <<EOF
-GUITAR_PORT=$GUITAR_PORT
-MIC_PORT=$MIC_PORT
-HP_L=$HP_L
-HP_R=$HP_R
-EOF
+echo "Copying port config..."
+cp interfaces.conf $PROJECT_DIR
 
 echo "Project created in '$PROJECT_DIR' with tempo $BPM BPM."
 
