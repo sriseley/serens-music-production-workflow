@@ -6,3 +6,5 @@ lv2-calf-plugins
 calfjackhost
 qjackctl
 qsynth
+jack_lsp
+fzf

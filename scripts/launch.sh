@@ -6,6 +6,9 @@ AMPS_DIR="$PROJECT_DIR/amps"
 RACKS_DIR="$PROJECT_DIR/racks"
 
 
+echo "Launching Jack control..."
+qjackctl &
+
 echo "Launching Qtractor..."
 qtractor "$SEQUENCER_FILE" &
 
@@ -30,3 +33,6 @@ echo "Launching QSynth..."
 qsynth &
 
 echo "All tools launched. JACK connections not yet made."
+
+echo "Loading hardware config..."
+source interfaces.conf
