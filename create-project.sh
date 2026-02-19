@@ -4,8 +4,11 @@ create_tab() {
     local TEMPLATE_NAME="$1"
     local OUTPUT_NAME="$2"
 
+    local TABS_FOLDER="$PROJECT_DIR/tabs"
+    mkdir -p "$TABS_FOLDER"
+
     local TAB_TEMPLATE_FOLDER="$TEMPLATES/$TEMPLATE_NAME"
-    local TAB_COPY="$PROJECT_DIR/$(basename "$TAB_TEMPLATE_FOLDER")"
+    local TAB_COPY="$TABS_FOLDER/$(basename "$TAB_TEMPLATE_FOLDER")"
 
     cp -r "$TAB_TEMPLATE_FOLDER" "$TAB_COPY"
 
@@ -17,7 +20,7 @@ create_tab() {
         exit 1
     fi
 
-    zip -r "$PROJECT_DIR/$OUTPUT_NAME" -j "$TAB_COPY"/* >/dev/null 2>&1
+    zip -r "$TABS_FOLDER/$OUTPUT_NAME" -j "$TAB_COPY"/* >/dev/null 2>&1
     rm -rf "$TAB_COPY"
 }
 
