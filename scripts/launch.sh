@@ -88,12 +88,39 @@ while IFS= read -r PORT; do
     jack_connect "$GUITAR_PORT" "$PORT"
 done
 
-echo "Connecting Qtractor guitar outputs to headphones..."
+echo "Connecting Qtractor mono outputs to headphones..."
 jack_lsp -p |
 awk '
 BEGIN {IGNORECASE=1}
 /^[^[:space:]]/ {port=$0}
 /properties: output/ && port ~ /qtractor/ && port ~ /guitar/ {print port}
+' |
+while IFS= read -r PORT; do
+    echo "Connecting $PORT → $HP_L"
+    jack_connect "$PORT" "$HP_L"
+    echo "Connecting $PORT → $HP_R"
+    jack_connect "$PORT" "$HP_R"
+done
+
+jack_lsp -p |
+awk '
+BEGIN {IGNORECASE=1}
+/^[^[:space:]]/ {port=$0}
+/properties: output/ && port ~ /qtractor/ && port ~ /vocal/ {print port}
+' |
+while IFS= read -r PORT; do
+    echo "Connecting $PORT → $HP_L"
+    jack_connect "$PORT" "$HP_L"
+    echo "Connecting $PORT → $HP_R"
+    jack_connect "$PORT" "$HP_R"
+done
+
+
+jack_lsp -p |
+awk '
+BEGIN {IGNORECASE=1}
+/^[^[:space:]]/ {port=$0}
+/properties: output/ && port ~ /qtractor/ && port ~ /synth/ {print port}
 ' |
 while IFS= read -r PORT; do
     echo "Connecting $PORT → $HP_L"
