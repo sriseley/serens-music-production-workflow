@@ -1,10 +1,10 @@
 <!DOCTYPE qtractorSession>
 <session name="sequencing" version="Qtractor 1.2.0">
  <properties>
-  <directory>/home/seren/Music</directory>
+  <directory>$DIRECTORY</directory>
   <description></description>
   <sample-rate>48000</sample-rate>
-  <tempo>182</tempo>
+  <tempo>$BPM</tempo>
   <ticks-per-beat>960</ticks-per-beat>
   <beats-per-bar>4</beats-per-bar>
   <beat-divisor>2</beat-divisor>

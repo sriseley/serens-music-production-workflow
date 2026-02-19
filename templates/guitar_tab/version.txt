@@ -1,0 +1,1 @@
+TuxGuitar_file_format 2.0
