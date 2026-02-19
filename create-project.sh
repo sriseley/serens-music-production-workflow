@@ -50,4 +50,12 @@ echo "Creating default guitar (drop D) and bass tablature..."
 create_tab "guitar_tab" "guitar.tg"
 create_tab "bass_tab" "bass.tg"
 
+echo "Creating an amp..."
+
+AMP_TEMPLATE="$TEMPLATES/amp_sim"
+AMP_FOLDER="$PROJECT_DIR/amps"
+DEFAULT_AMP_NAME="rhythm_guitar"
+mkdir -p "$AMP_FOLDER"
+cp "$AMP_TEMPLATE" "$AMP_FOLDER/$DEFAULT_AMP_NAME"
+
 echo "Project created in '$PROJECT_DIR' with tempo $BPM BPM."
