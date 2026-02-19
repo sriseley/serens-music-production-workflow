@@ -1,0 +1,8 @@
+qtractor
+guitarix
+hydrogen
+tuxguitar
+lv2-calf-plugins
+carla
+qjackctl
+qsynth
