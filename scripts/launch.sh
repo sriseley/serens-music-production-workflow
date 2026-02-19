@@ -14,6 +14,37 @@ list_outputs() {
     '
 }
 
+connect_stereo_to_headphones() {
+    local keyword1="$1"
+    local keyword2="$2"
+    local hp_l="$3"
+    local hp_r="$4"
+
+    local ports=($(jack_lsp -p | awk -v k1="$keyword1" -v k2="$keyword2" '
+        BEGIN {IGNORECASE=1}
+        /^[^[:space:]]/ {port=$0}
+        /properties: output/ && port ~ k1 && port ~ k2 {print port}
+    '))
+
+    if [ "${#ports[@]}" -lt 2 ]; then
+        echo "Error: Could not detect two stereo output ports for keywords '$keyword1' and '$keyword2'."
+        return 1
+    fi
+
+    local out_l="${ports[0]}"
+    local out_r="${ports[1]}"
+
+    if ! jack_lsp -c | grep -q "$out_l.*$hp_l"; then
+        echo "Connecting $out_l → $hp_l"
+        jack_connect "$out_l" "$hp_l"
+    fi
+
+    if ! jack_lsp -c | grep -q "$out_r.*$hp_r"; then
+        echo "Connecting $out_r → $hp_r"
+        jack_connect "$out_r" "$hp_r"
+    fi
+}
+
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SEQUENCER_FILE="$PROJECT_DIR/sequencer/sequencer.qtr"
 AMPS_DIR="$PROJECT_DIR/amps"
@@ -103,29 +134,7 @@ done
 
 echo "Connecting Qtractor Master outputs to headphones (true stereo)..."
 
-MASTER_PORTS=($(jack_lsp -p | awk '
-BEGIN {IGNORECASE=1}
-/^[^[:space:]]/ {port=$0}
-/properties: output/ && port ~ /qtractor/ && port ~ /master/ {print port}
-'))
-
-if [ ${#MASTER_PORTS[@]} -lt 2 ]; then
-    echo "Error: Could not detect two Master output ports."
-    exit 1
-fi
-
-MASTER_L=${MASTER_PORTS[0]}
-MASTER_R=${MASTER_PORTS[1]}
-
-if ! jack_lsp -c | grep -q "$MASTER_L.*$HP_L"; then
-    echo "Connecting $MASTER_L → $HP_L"
-    jack_connect "$MASTER_L" "$HP_L"
-fi
-
-if ! jack_lsp -c | grep -q "$MASTER_R.*$HP_R"; then
-    echo "Connecting $MASTER_R → $HP_R"
-    jack_connect "$MASTER_R" "$HP_R"
-fi
+connect_stereo_to_headphones "qtractor" "master" "$HP_L" "$HP_R"
 
 echo "Connecting microphone to Qtractor vocal bus..."
 
@@ -146,6 +155,8 @@ if ! jack_lsp -c | grep -q "$MIC_PORT.*$VOCAL_PORT"; then
 else
     echo "Connection already exists: $MIC_PORT → $VOCAL_PORT"
 fi
+
+"Connecting qsynth to headphones..."
 
 echo "Wiring up rack..."
 python scripts/wire-calf.py
