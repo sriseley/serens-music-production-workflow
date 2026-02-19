@@ -1,6 +1,25 @@
 #!/bin/bash
 
+list_inputs() {
+    jack_lsp -p | awk '
+    /^[^[:space:]]/ {port=$0}
+    /properties: input/ {print port}
+    '
+}
 
+list_outputs() {
+    jack_lsp -p | awk '
+    /^[^[:space:]]/ {port=$0}
+    /properties: output/ {print port}
+    '
+}
+
+select_port() {
+    prompt="$1"
+    ports="$2"
+
+    echo "$ports" | fzf --prompt="$prompt > "
+}
 
 create_tab() {
     local TEMPLATE_NAME="$1"
@@ -33,18 +52,6 @@ TAB_BASS_NAME=""
 
 read -e -i "$PREPOP" -p "Enter the project directory: " PROJECT_DIR
 read -rp "Enter the project tempo (BPM): " BPM
-
-echo "Select Guitar Interface:"
-GUITAR_PORT=$(select_port "Guitar Interface" "$(list_outputs)")
-
-echo "Select Microphone Input:"
-MIC_PORT=$(select_port "Mic Input" "$(list_outputs)")
-
-echo "Select Headphone Output (Left):"
-HP_L=$(select_port "Headphones L" "$(list_inputs)")
-
-echo "Select Headphone Output (Right):"
-HP_R=$(select_port "Headphones R" "$(list_inputs)")
 
 mkdir -p "$PROJECT_DIR"
 
@@ -90,6 +97,9 @@ sed -i "s|\$BPM|$BPM|g" "$DRUM_FOLDER/$(basename "$DRUM_TEMPLATE")"
 echo "Creating scripts..."
 LAUNCH_SCRIPTS="scripts/*.sh"
 cp $LAUNCH_SCRIPTS $PROJECT_DIR
+
+echo "Creating folder for midi..."
+mkdir -p "$PROJECT_DIR/midi"
 
 echo "Copying port config..."
 cp interfaces.conf $PROJECT_DIR

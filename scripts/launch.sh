@@ -1,5 +1,19 @@
 #!/bin/bash
 
+list_inputs() {
+    jack_lsp -p | awk '
+    /^[^[:space:]]/ {port=$0}
+    /properties: input/ {print port}
+    '
+}
+
+list_outputs() {
+    jack_lsp -p | awk '
+    /^[^[:space:]]/ {port=$0}
+    /properties: output/ {print port}
+    '
+}
+
 PROJECT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SEQUENCER_FILE="$PROJECT_DIR/sequencer/sequencer.qtr"
 AMPS_DIR="$PROJECT_DIR/amps"

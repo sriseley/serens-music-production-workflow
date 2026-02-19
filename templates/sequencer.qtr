@@ -59,7 +59,24 @@
     <output-connects>
     </output-connects>
    </audio-bus>
-   <audio-bus mode="duplex" name="Rhythm guitar">
+   <audio-bus mode="duplex" name="Guitar">
+    <monitor>0</monitor>
+    <channels>1</channels>
+    <auto-connect>0</auto-connect>
+    <input-gain>1</input-gain>
+    <input-panning>0</input-panning>
+    <input-controllers/>
+    <input-plugins/>
+    <input-connects>
+    </input-connects>
+    <output-gain>1</output-gain>
+    <output-panning>0</output-panning>
+    <output-controllers/>
+    <output-plugins/>
+    <output-connects>
+    </output-connects>
+   </audio-bus>
+<audio-bus mode="duplex" name="Synth">
     <monitor>0</monitor>
     <channels>1</channels>
     <auto-connect>0</auto-connect>
@@ -114,29 +131,7 @@
    <edit-head>0</edit-head>
    <edit-tail>0</edit-tail>
   </view>
-  <track name="Vocals" type="audio">
-   <properties>
-    <input-bus>Vocals</input-bus>
-    <output-bus>Vocals</output-bus>
-   </properties>
-   <state>
-    <mute>0</mute>
-    <solo>0</solo>
-    <record>0</record>
-    <monitor>0</monitor>
-    <gain>1</gain>
-    <panning>0</panning>
-   </state>
-   <view>
-    <height>96</height>
-    <background-color>#ccffff</background-color>
-    <foreground-color>#667f7f</foreground-color>
-   </view>
-   <controllers/>
-   <clips/>
-   <plugins/>
-  </track>
-   <track name="Drums" type="midi">
+<track name="Metronome" type="midi">
    <properties>
     <input-bus>Master</input-bus>
     <output-bus>Master</output-bus>
@@ -161,10 +156,13 @@
    <clips/>
    <plugins/>
   </track>
-  <track name="Rhythm guitar" type="audio">
+   <track name="Drums - dry" type="midi">
    <properties>
-    <input-bus>Rhythm guitar</input-bus>
-    <output-bus>Rhythm guitar</output-bus>
+    <input-bus>Master</input-bus>
+    <output-bus>Master</output-bus>
+    <midi-omni>0</midi-omni>
+    <midi-channel>9</midi-channel>
+    <midi-drums>0</midi-drums>
    </properties>
    <state>
     <mute>0</mute>
@@ -176,36 +174,14 @@
    </state>
    <view>
     <height>96</height>
-    <background-color>#ccffff</background-color>
-    <foreground-color>#667f7f</foreground-color>
+    <background-color>#ccccff</background-color>
+    <foreground-color>#66667f</foreground-color>
    </view>
    <controllers/>
    <clips/>
    <plugins/>
   </track>
-  <track name="Rhythm guitar - double" type="audio">
-   <properties>
-    <input-bus>Rhythm guitar</input-bus>
-    <output-bus>Rhythm guitar</output-bus>
-   </properties>
-   <state>
-    <mute>0</mute>
-    <solo>0</solo>
-    <record>0</record>
-    <monitor>0</monitor>
-    <gain>1</gain>
-    <panning>0</panning>
-   </state>
-   <view>
-    <height>96</height>
-    <background-color>#ccffff</background-color>
-    <foreground-color>#667f7f</foreground-color>
-   </view>
-   <controllers/>
-   <clips/>
-   <plugins/>
-  </track>
-   <track name="Bass" type="midi">
+   <track name="Bass - dry" type="midi">
    <properties>
     <input-bus>Master</input-bus>
     <output-bus>Master</output-bus>
@@ -225,13 +201,189 @@
    </state>
    <view>
     <height>96</height>
+    <background-color>#ccccff</background-color>
+    <foreground-color>#66667f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+  </track>
+  <track name="Vocals - dry" type="audio">
+   <properties>
+    <input-bus>Vocals</input-bus>
+    <output-bus>Vocals</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
+    <background-color>#ccffff</background-color>
+    <foreground-color>#667f7f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+  </track>
+  <track name="Guitar - dry" type="audio">
+   <properties>
+    <input-bus>Guitar</input-bus>
+    <output-bus>Guitar</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
+    <background-color>#ccffff</background-color>
+    <foreground-color>#667f7f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+  </track>
+  <track name="Guitar double - dry" type="audio">
+   <properties>
+    <input-bus>Guitar</input-bus>
+    <output-bus>Guitar</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
+    <background-color>#ccffff</background-color>
+    <foreground-color>#667f7f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+   </track>
+  <track name="Vocals - processed" type="audio">
+   <properties>
+    <input-bus>Vocals</input-bus>
+    <output-bus>Vocals</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
     <background-color>#ff99ff</background-color>
     <foreground-color>#7f4c7f</foreground-color>
    </view>
    <controllers/>
    <clips/>
    <plugins/>
-  </track>
+   </track>
+  <track name="Guitar - processed" type="audio">
+   <properties>
+    <input-bus>Guitar</input-bus>
+    <output-bus>Guitar</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
+    <background-color>#ff99ff</background-color>
+    <foreground-color>#7f4c7f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+   </track>
+ <track name="Guitar double - processed" type="audio">
+   <properties>
+    <input-bus>Guitar</input-bus>
+    <output-bus>Guitar</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
+    <background-color>#ff99ff</background-color>
+    <foreground-color>#7f4c7f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+   </track>
+  <track name="Bass - processed" type="audio">
+   <properties>
+    <input-bus>Synth</input-bus>
+    <output-bus>Synth</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
+    <background-color>#ff99ff</background-color>
+    <foreground-color>#7f4c7f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+   </track>
+ <track name="Drums - processed" type="audio">
+   <properties>
+    <input-bus>Synth</input-bus>
+    <output-bus>Synth</output-bus>
+   </properties>
+   <state>
+    <mute>0</mute>
+    <solo>0</solo>
+    <record>0</record>
+    <monitor>0</monitor>
+    <gain>1</gain>
+    <panning>0</panning>
+   </state>
+   <view>
+    <height>96</height>
+    <background-color>#ff99ff</background-color>
+    <foreground-color>#7f4c7f</foreground-color>
+   </view>
+   <controllers/>
+   <clips/>
+   <plugins/>
+   </track>
  </tracks>
 </session>
 
